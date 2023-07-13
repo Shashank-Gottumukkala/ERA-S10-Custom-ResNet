@@ -44,6 +44,9 @@ class CustomLayer(nn.Module):
 
     def forward(self, x):
         x = self.pool_layer(x)
-        
+        if self.res_layer is not None:
+            x_ = x
+            x = self.res_layer
+            x = x + x_
 
         
