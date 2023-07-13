@@ -4,6 +4,7 @@ from torch.nn import functional as F
 from tqdm import tqdm
 from matplotlib import pyplot as plt
 from collections import defaultdict
+from torch_lr_finder import LRFinder
 
 use_cuda = torch.cuda.is_available()
 device = torch.device("cuda" if use_cuda else "cpu")
@@ -65,4 +66,59 @@ class Train(object):
         axs[0].set_title("Training Loss")
         axs[1].plot(self.train_acc)
         axs[1].set_title("Training Accuracy")
+
+class Test(object):
+    def __init__(self, model, dataset, criterion):
+        self.model = model
+        self.device = device
+        self.criterion = criterion
+        self.dataset = dataset
+
+        self.test_losses = []
+        self.test_acc = []
+
+    def __call__(self, incorrect_preds= None):
+        self.model.eval()
+
+        test_loss = 0
+        correct = 0
+        processed = 0
+
+        with torch.no_grad():
+            for batch_idx, (data, target) in enumerate(self.dataset.test_loader):
+                data,target = data.to(self.device), target.to(self.device)
+                pred = self.model(data)
+
+                test_loss += self.criterion(pred, target, reduction="sum").item()
+
+                correct += correct_pred_count(pred, target)
+                processed += len(data)
+
+                if incorrect_preds is not None:
+                    ind, pred, truth = incorrect_pred_count(pred, target)
+                    incorrect_preds["images"] += data[ind]
+                    incorrect_preds["ground_truths"] += truth
+                    incorrect_preds["predicted_vals"] += pred
+
+
+        test_loss /= processed
+        self.test_acc.append(100 * correct / processed)
+        self.test_losses.append(test_loss)
+
+        print(f"Test: Average loss: {test_loss:0.4f}, Test_Accuracy: {100 * correct / processed:0.2f}")
+
+        return test_loss
+
+    def plot_stats(self):
+        fig, axs = plt.subplots(1, 2, figsize=(15, 5))
+        axs[0].plot(self.test_losses)
+        axs[0].set_title("Test Loss")
+        axs[1].plot(self.test_acc)
+        axs[1].set_title("Test Accuracy")
+
+class Experiment():
+    def __init__(self, model, dataset, lr=0.03, criterion = F.cross_entropy):
+        self.model = model.to(device)
+        self.dataset = dataset
+        self.optimizer = optim.Adam(self.model.parameters(), lr=lr, )
 
