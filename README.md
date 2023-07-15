@@ -4,8 +4,6 @@ This repository contains a custom ResNet model implementation for the CIFAR10 da
 
 ## ResNet (Residual Network)
 
-ResNet, short for Residual Network, is a deep learning architecture that was introduced by Kaiming He et al. in the paper "Deep Residual Learning for Image Recognition" (2015). ResNet has been widely adopted and has achieved remarkable results in various computer vision tasks, including image classification.
-
 The main idea behind ResNet is to address the degradation problem that occurs when deeper neural networks are trained. It has been observed that as the network depth increases, the accuracy of the network starts to saturate and then degrade rapidly. The degradation problem arises due to the optimization difficulties in training deep networks and the vanishing/exploding gradient problem.
 
 ResNet introduces the concept of residual learning to overcome the degradation problem. In a ResNet, instead of directly learning the underlying mapping, the network learns the residual mapping. This is achieved by introducing skip connections or "shortcut connections" that bypass one or more layers. By propagating the identity mapping through the shortcut connections, the gradient can flow directly from the beginning to the end of the network, enabling the learning of deeper networks.
