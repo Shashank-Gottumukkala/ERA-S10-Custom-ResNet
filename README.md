@@ -23,9 +23,14 @@ During the forward pass:
 
 The skip connections in `CustomLayer` allow the model to learn residual mappings, which capture the difference between the input and the desired output. By adding the residual to the input, the model can easily learn to make small adjustments and focus on learning the residual information.
 
-## Repository Structure
+## File Structure
+The code repository has the following file structure:
 
-The repository is structured as follows:
+  - `dataset.py` : This code provides a `DataSet` class that serves as a base class for handling image datasets. It includes functionality for loading and transforming data, as well as displaying examples from the dataset.
+
+
+
+
 
 
 
