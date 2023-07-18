@@ -1,6 +1,6 @@
 # Custom ResNet Model for CIFAR10
 
-This repository contains a custom ResNet model implementation for the CIFAR10 dataset. The goal of this project is to achieve a classification accuracy of 90% or higher on the CIFAR10 dataset, using techniques such as Albumentations for image augmentation and dropout to reduce overfitting.
+This repository contains a custom ResNet model implementation for the CIFAR10 dataset. The goal of this project is to achieve a classification accuracy of `90%` or higher on the `CIFAR10` dataset, using techniques such as `Albumentations` for image augmentation and dropout to reduce overfitting.
 
 ## ResNet (Residual Network)
 
