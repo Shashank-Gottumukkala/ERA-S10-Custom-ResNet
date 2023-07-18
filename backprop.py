@@ -42,17 +42,15 @@ class Train(object):
             data, target = data.to(self.device), target.to(self.device)
             self.optimizer.zero_grad()
 
-            # Predict
+
             pred = self.model(data)
 
-            # Calculate loss
             loss = self.criterion(pred, target)
             if self.l1 > 0:
                 loss += self.l1 * sum(p.abs().sum() for p in self.model.parameters())
 
             train_loss += loss.item() * len(data)
 
-            # Backpropagation
             loss.backward()
             self.optimizer.step()
 

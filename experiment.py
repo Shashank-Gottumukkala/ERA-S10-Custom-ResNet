@@ -6,6 +6,8 @@ from torch_lr_finder import LRFinder
 from utils import get_device
 from backprop import Train, Test
 
+from torch.optim.lr_scheduler import OneCycleLR
+
 
 class Experiment(object):
     def __init__(self, model, dataset, criterion=None, epochs=24):
@@ -14,9 +16,9 @@ class Experiment(object):
         self.dataset = dataset
         self.criterion = criterion or nn.CrossEntropyLoss()
         self.epochs = epochs
-        self.optimizer = optim.Adam(self.model.parameters(), lr=0.03, weight_decay=1e-2)
+        self.optimizer = optim.Adam(self.model.parameters(), lr= 1e-7 , weight_decay = 1e-2)
         self.best_lr = self.find_lr()
-        self.scheduler = optim.lr_scheduler.OneCycleLR(
+        self.scheduler = OneCycleLR(
             self.optimizer,
             max_lr=self.best_lr,
             steps_per_epoch=len(self.dataset.train_loader),
@@ -30,10 +32,9 @@ class Experiment(object):
         self.train = Train(self.model, dataset, self.criterion, self.optimizer, self.scheduler)
         self.test = Test(self.model, dataset, self.criterion)
         self.incorrect_preds = None
-
     def find_lr(self):
         lr_finder = LRFinder(self.model, self.optimizer, self.criterion, device=self.device)
-        lr_finder.range_test(self.dataset.train_loader, end_lr=0.1, num_iter=100, step_mode='exp')
+        lr_finder.range_test(self.dataset.train_loader, end_lr= 0.1, num_iter=100, step_mode='exp')
         _, best_lr = lr_finder.plot() 
         lr_finder.reset()  
         return best_lr
