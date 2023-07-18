@@ -13,7 +13,7 @@ ResNet introduces the concept of residual learning to overcome the degradation p
 
 In the context of deep learning and ResNet, skip connections, also known as shortcut connections or identity mappings, refer to the direct connections that bypass one or more layers in a neural network. These connections allow the gradient to flow more easily during backpropagation and help address the degradation problem that arises when training deep networks.
 
-In this repository, skip connections are implemented using a custom layer called `CustomLayer` present in [`resnet.py`]((https://github.com/Shashank-Gottumukkala/ERA-S10-Custom-ResNet/blob/main/resnet.py)). The `CustomLayer` consists of a convolutional layer and a residual layer.
+In this repository, skip connections are implemented using a custom layer called `CustomLayer` present in [`resnet.py`](https://github.com/Shashank-Gottumukkala/ERA-S10-Custom-ResNet/blob/main/resnet.py). The `CustomLayer` consists of a convolutional layer and a residual layer.
 
 During the forward pass:
 1. The input is first passed through the convolutional layer.
