@@ -8,6 +8,12 @@ The main idea behind ResNet is to address the degradation problem that occurs wh
 
 ResNet introduces the concept of residual learning to overcome the degradation problem. In a ResNet, instead of directly learning the underlying mapping, the network learns the residual mapping. This is achieved by introducing skip connections or "shortcut connections" that bypass one or more layers. By propagating the identity mapping through the shortcut connections, the gradient can flow directly from the beginning to the end of the network, enabling the learning of deeper networks.
 
+## Albumentations:
+
+Albumentations is a popular Python library for image augmentation in machine learning and computer vision tasks. It provides a wide range of transformation techniques, such as random cropping, rotations, flips, color adjustments, and many more. Albumentations is designed to be fast and efficient, making it suitable for real-time applications and large-scale datasets.
+
+Using Albumentations, we can easily apply complex augmentations to our training dataset, improving the model's ability to generalize and handle various real-world scenarios.
+
 
 ## Skip Connections and their Implementation:
 
@@ -27,6 +33,9 @@ The skip connections in `CustomLayer` allow the model to learn residual mappings
 The code repository has the following file structure:
 
   - `dataset.py` : This code provides a `DataSet` class that serves as a base class for handling image datasets. It includes functionality for loading and transforming data, as well as displaying examples from the dataset.
+
+  - ![image](https://github.com/Shashank-Gottumukkala/ERA-S10-Custom-ResNet/assets/59787210/adcf41b1-cd4a-4def-82a4-31eeab619863)
+
 
 
 
